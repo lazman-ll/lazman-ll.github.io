@@ -227,7 +227,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;以后修改了文件后就无需输入上述这么多命令，在主文件夹下进入命令行，输入如下命令即可&lt;/p&gt;
+&lt;p&gt;以后修改了文件后就无需输入上述这么多命令，在主文件夹下进入命令行，输入如下命令即可，有时候git push失败可以多试几次&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
