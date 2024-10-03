@@ -3,12 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lazman-ll.github.io/</loc>
-    <lastmod>2024-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/categories/blog%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2024-10-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lazman-ll.github.io/categories/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/java/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/mysql/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/post/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/redis/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/springboot/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/springcloud/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/tags/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/categories/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lazman-ll.github.io/categories/blog%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2024-10-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lazman-ll.github.io/tags/github/</loc>
@@ -20,12 +47,6 @@
     <loc>https://lazman-ll.github.io/tags/markdown/</loc>
     <lastmod>2024-10-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lazman-ll.github.io/post/</loc>
-    <lastmod>2024-10-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/tags/</loc>
-    <lastmod>2024-10-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://lazman-ll.github.io/p/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2024-10-01T00:00:00+00:00</lastmod>
   </url><url>
@@ -35,27 +56,10 @@
     <loc>https://lazman-ll.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lazman-ll.github.io/tags/css/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/tags/html/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/p/markdown-syntax-guide/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/categories/test/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lazman-ll.github.io/tags/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://lazman-ll.github.io/%E5%85%B3%E4%BA%8E/</loc>
   </url><url>
     <loc>https://lazman-ll.github.io/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5/</loc>
   </url><url>
     <loc>https://lazman-ll.github.io/search/</loc>
-  </url><url>
-    <loc>https://lazman-ll.github.io/categories/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF/</loc>
   </url>
 </urlset>

@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文是黑马学成在线的环境搭建过程">
+<title>学成在线环境搭建</title>
+
+<link rel='canonical' href='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.eaf6dce05b712d03858c738a4e804ae9e9d8b24122f98be60784aeab9f23c72c.css"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><meta property='og:title' content="学成在线环境搭建">
+<meta property='og:description' content="本文是黑马学成在线的环境搭建过程">
+<meta property='og:url' content='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
+<meta property='og:site_name' content='仙人指路'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java' /><meta property='article:tag' content='springcloud' /><meta property='article:tag' content='springboot' /><meta property='article:tag' content='redis' /><meta property='article:tag' content='mysql' /><meta property='article:published_time' content='2024-10-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-10-02T00:00:00&#43;00:00'/><meta property='og:image' content='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg' />
+<meta name="twitter:title" content="学成在线环境搭建">
+<meta name="twitter:description" content="本文是黑马学成在线的环境搭建过程"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu2869755653433789774.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">仙人指路</a></h1>
+            <h2 class="site-description">欢迎来到我的博客世界，这里会分享一些我的学习记录以及好玩的网站</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/lazman-ll'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/agitated'
+                        target="_blank"
+                        title="码云"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Gitee</title><path d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.016 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.63c0 .327.266.592.593.592h5.63c.982 0 1.778-.796 1.778-1.778v-.296a.593.593 0 0 0-.592-.593h-4.15a.592.592 0 0 1-.592-.592v-1.482a.593.593 0 0 1 .593-.592h6.815c.327 0 .593.265.593.592v3.408a4 4 0 0 1-4 4H5.926a.593.593 0 0 1-.593-.593V9.778a4.444 4.444 0 0 1 4.445-4.444h8.296Z"/></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-开发工具版本">1 开发工具版本</a></li>
+    <li><a href="#2-idea-环境配置">2 IDEA 环境配置</a>
+      <ol>
+        <li><a href="#21-创建github仓库">2.1 创建GitHub仓库</a></li>
+        <li><a href="#22-在idea中拉取github中的仓库">2.2 在IDEA中拉取GitHub中的仓库</a></li>
+        <li><a href="#23-编码配置">2.3 编码配置</a></li>
+        <li><a href="#24-设置java编译级别">2.4 设置Java编译级别</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-maven-环境">3 Maven 环境</a>
+      <ol>
+        <li><a href="#31-配置maven仓库">3.1 配置maven仓库</a></li>
+        <li><a href="#32-idea中配置maven">3.2 IDEA中配置maven</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-安装虚拟机">4 安装虚拟机</a>
+      <ol>
+        <li><a href="#41-设置虚拟机网络">4.1 设置虚拟机网络</a></li>
+        <li><a href="#42-导入虚拟机">4.2 导入虚拟机</a></li>
+        <li><a href="#43-远程连接虚拟机">4.3 远程连接虚拟机</a></li>
+        <li><a href="#43-数据库客户端连接虚拟机中的mysql">4.3 数据库客户端连接虚拟机中的MySQL</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-git环境配置">5 Git环境配置</a>
+      <ol>
+        <li><a href="#51-添加gitignore文件">5.1 添加.gitignore文件</a></li>
+        <li><a href="#52-创建开发分支">5.2 创建开发分支</a></li>
+      </ol>
+    </li>
+    <li><a href="#6-基础工程搭建">6 基础工程搭建</a>
+      <ol>
+        <li><a href="#61-工程结构关系">6.1 工程结构关系</a></li>
+        <li><a href="#62-构建父工程">6.2 构建父工程</a></li>
+        <li><a href="#63-构建基础工程">6.3 构建基础工程</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                <img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash_hu13459586684579990428.jpg"
+                        srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash_hu13459586684579990428.jpg 800w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash_hu3425483315149503896.jpg 1600w"
+                        width="800" 
+                        height="534" 
+                        loading="lazy"
+                        alt="Featured image of post 学成在线环境搭建" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF/" style="background-color: #2a9d8f; color: #fff;">
+                学成在线
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">学成在线环境搭建</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文是黑马学成在线的环境搭建过程
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-10-02</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+        
+        <div>
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-description"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>
+            <time class="article-words">
+              3499 字
+            </time>
+         </div>
+       
+    </footer>
+    
+
+    
+
+
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本文描述了黑马springcloud项目学成在线的环境搭建过程</p>
+<h2 id="1-开发工具版本">1 开发工具版本
+</h2><p>本项目主要使用的开发工具列表如下所示：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">开发工具</th>
+          <th style="text-align: left">版本号</th>
+          <th style="text-align: left">安装位置</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">IntelliJ-IDEA</td>
+          <td style="text-align: left">2021.x以上版本</td>
+          <td style="text-align: left">个人电脑</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">JDK</td>
+          <td style="text-align: left">1.8.x</td>
+          <td style="text-align: left">个人电脑</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Maven</td>
+          <td style="text-align: left">3.8.x以上版本</td>
+          <td style="text-align: left">个人电脑</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Git</td>
+          <td style="text-align: left">2.37.x</td>
+          <td style="text-align: left">个人电脑</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">VMware-workstation</td>
+          <td style="text-align: left">16.x</td>
+          <td style="text-align: left">个人电脑</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">CentOS</td>
+          <td style="text-align: left">7.x</td>
+          <td style="text-align: left">虚拟机</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Docker</td>
+          <td style="text-align: left">18.09.0</td>
+          <td style="text-align: left">虚拟机</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Mysql</td>
+          <td style="text-align: left">8.x</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">nacos</td>
+          <td style="text-align: left">1.4.1</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">rabbitmq</td>
+          <td style="text-align: left">3.8.34</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">redis</td>
+          <td style="text-align: left">6.2.7</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">xxl-job-admin</td>
+          <td style="text-align: left">2.3.1</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">minio</td>
+          <td style="text-align: left">RELEASE.2022-09-07</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">elasticsearch</td>
+          <td style="text-align: left">7.12.1</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">kibana</td>
+          <td style="text-align: left">7.12.1</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">gogs</td>
+          <td style="text-align: left">0.13.0</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">nginx</td>
+          <td style="text-align: left">1.12.2</td>
+          <td style="text-align: left">docker</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="2-idea-环境配置">2 IDEA 环境配置
+</h2><h3 id="21-创建github仓库">2.1 创建GitHub仓库
+</h3><img src="Github创建仓库.png" alt="Github创建仓库" style="zoom: 67%;" />
+<h3 id="22-在idea中拉取github中的仓库">2.2 在IDEA中拉取GitHub中的仓库
+</h3><ol>
+<li>
+<p>创建项目时，选择通过版本控制创建项目(Get from VCS)</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%80%9A%E8%BF%87%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE.png"
+	width="982"
+	height="297"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%80%9A%E8%BF%87%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE_hu7417895287045642034.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%80%9A%E8%BF%87%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE_hu6398883043198035502.png 1024w"
+	loading="lazy"
+	
+		alt="通过版本控制创建项目"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="330"
+		data-flex-basis="793px"
+	
+></p>
+</li>
+<li>
+<p>输入仓库地址，并选择工程路径。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%8B%89%E5%8F%96github%E4%BB%93%E5%BA%93.png"
+	width="1238"
+	height="373"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%8B%89%E5%8F%96github%E4%BB%93%E5%BA%93_hu4770277109809351105.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%8B%89%E5%8F%96github%E4%BB%93%E5%BA%93_hu17420783355349014375.png 1024w"
+	loading="lazy"
+	
+		alt="拉取github仓库"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="331"
+		data-flex-basis="796px"
+	
+></p>
+</li>
+</ol>
+<h3 id="23-编码配置">2.3 编码配置
+</h3><p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%BC%96%E7%A0%81%E9%85%8D%E7%BD%AE.png"
+	width="1116"
+	height="871"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%BC%96%E7%A0%81%E9%85%8D%E7%BD%AE_hu16419054725702834257.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%BC%96%E7%A0%81%E9%85%8D%E7%BD%AE_hu3095287212319671050.png 1024w"
+	loading="lazy"
+	
+		alt="idea编码配置(使用utf-8编码)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="128"
+		data-flex-basis="307px"
+	
+></p>
+<h3 id="24-设置java编译级别">2.4 设置Java编译级别
+</h3><p>本项目使用<strong>jdk8</strong>作为项目语言环境，故需要设置Java的编译环境：</p>
+<ol>
+<li>
+<p>工程创建成功后，点击Project Structure：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB1.png"
+	width="1037"
+	height="756"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB1_hu14171979543157309740.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB1_hu13574106660608493905.png 1024w"
+	loading="lazy"
+	
+		alt="idea的Java编译级别步骤1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="137"
+		data-flex-basis="329px"
+	
+></p>
+</li>
+<li>
+<p>点击Project，设置SDK为1.8及Project language level，如下图：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB2.png"
+	width="1123"
+	height="876"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB2_hu12743416189061683549.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/idea%E7%9A%84Java%E7%BC%96%E8%AF%91%E7%BA%A7%E5%88%AB2_hu14441179058761888727.png 1024w"
+	loading="lazy"
+	
+		alt="idea的Java编译级别步骤2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="128"
+		data-flex-basis="307px"
+	
+></p>
+</li>
+</ol>
+<h2 id="3-maven-环境">3 Maven 环境
+</h2><h3 id="31-配置maven仓库">3.1 配置maven仓库
+</h3><p>解压课程资料中的maven仓库下的repository.zip到你的maven工作目录(或者随便一个目录)中</p>
+<p>在maven的conf目录中的setting.xml文件中配置本地仓库的地址，为刚才repository.zip的地址</p>
+<p>​	<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/maven%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80.png"
+	width="1118"
+	height="614"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/maven%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80_hu8965439464373645584.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/maven%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80_hu4789047795961622295.png 1024w"
+	loading="lazy"
+	
+		alt="maven配置本地仓库地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="182"
+		data-flex-basis="437px"
+	
+></p>
+<h3 id="32-idea中配置maven">3.2 IDEA中配置maven
+</h3><p>在IDEA中配置maven：进入 File &ndash;&gt; Settings &ndash;&gt; Build &ndash;&gt; Build Tools &ndash;&gt; Maven，配置maven安装目录、setting.xml及本地仓库的位置。</p>
+<p>​	<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEmaven.png"
+	width="1118"
+	height="883"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEmaven_hu16975560905362522044.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEmaven_hu17446934524944052429.png 1024w"
+	loading="lazy"
+	
+		alt="IDEA中配置maven"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="126"
+		data-flex-basis="303px"
+	
+></p>
+<ul>
+<li>
+<p>①代表你的maven安装的位置，若以前用过maven，一般不用修改</p>
+</li>
+<li>
+<p>②代表你的maven的配置文件所在地址</p>
+</li>
+<li>
+<p>③代表你使用的本地仓库的地址(注意：最后一级目录是你所有依赖的前一级)</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80.png"
+	width="960"
+	height="718"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80_hu13658973244633706485.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80_hu16129823074503215002.png 1024w"
+	loading="lazy"
+	
+		alt="本地仓库地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="320px"
+	
+></p>
+</li>
+</ul>
+<h2 id="4-安装虚拟机">4 安装虚拟机
+</h2><p>项目中用到的一些服务端软件如：MySQL、Nacos配置中心、RabbitMQ消息队列等通常会安装在企业局域网的服务器中，开发人员去远程连接它们。在本项目中我们在自己的电脑上安装虚拟机，虚拟机代表了企业局域网中的服务器。</p>
+<p>服务器操作系统使用Centos7，导入黑马课程中的虚拟机文件(包含了所有的需要安装的服务端软件)，也可以自行安装Centos7虚拟机(服务端软件需要自己安装)。</p>
+<h3 id="41-设置虚拟机网络">4.1 设置虚拟机网络
+</h3><p>点击 “编辑&ndash;》虚拟网络编辑器”配置网络地址，地址须与下图一致。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C.png"
+	width="1129"
+	height="922"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C_hu13524793864358504277.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C_hu11159454246723295460.png 1024w"
+	loading="lazy"
+	
+		alt="设置虚拟机网络"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="122"
+		data-flex-basis="293px"
+	
+></p>
+<p>设置子网IP：192.168.101.0，子网掩码：255.255.255.0。</p>
+<h3 id="42-导入虚拟机">4.2 导入虚拟机
+</h3><p>解压课程资料中的虚拟机文件，进入解压后的文件夹，双击&quot;CentOS 7 64 位.vmx&quot; 文件，选择复制虚拟机。(博主在实操过程中并未出现复制虚拟机选项，而是直接跳转到了vm界面中，但是在开启该虚拟机时，有一个选项要求我选择&quot;已复制虚拟机&quot;或&quot;已移动虚拟机&quot;，我选择了已复制，此处不知是否有问题？)</p>
+<p>注意：虚拟机的IP地址为192.168.101.65，不用修改IP地址。</p>
+<h3 id="43-远程连接虚拟机">4.3 远程连接虚拟机
+</h3><p>博主使用了MobaXterm 远程连接虚拟机中的CentOs系统，具体连接过程可自行上网搜索</p>
+<p>IP地址：192.168.101.65</p>
+<p>账号与密码为：root/centos</p>
+<p>连接完毕执行以下命令</p>
+<p>执行 systemctl start docker 启动docker。</p>
+<p>运行： sh /data/soft/restart.sh</p>
+<p>查询docker容器：docker ps，执行完毕后，docker容器运行情况如下图：</p>
+<p>​	<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/docker%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%83%85%E5%86%B5.png"
+	width="1556"
+	height="625"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/docker%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%83%85%E5%86%B5_hu82163726877970282.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/docker%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%83%85%E5%86%B5_hu2575866750637321113.png 1024w"
+	loading="lazy"
+	
+		alt="docker容器运行情况"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="248"
+		data-flex-basis="597px"
+	
+></p>
+<h3 id="43-数据库客户端连接虚拟机中的mysql">4.3 数据库客户端连接虚拟机中的MySQL
+</h3><p>博主使用的Navicat进行连接</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/mysql%E8%BF%9E%E6%8E%A5.png"
+	width="792"
+	height="423"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/mysql%E8%BF%9E%E6%8E%A5_hu10038014025828839696.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/mysql%E8%BF%9E%E6%8E%A5_hu6139251334818694191.png 1024w"
+	loading="lazy"
+	
+		alt="数据库连接"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="187"
+		data-flex-basis="449px"
+	
+></p>
+<p>所有数据库信息如下：其中包含了本项目所有要用的数据库，一般以后无需创建</p>
+<p>​												<img src="Mysql中的数据库.png" alt="Mysql中的数据库" style="zoom: 67%;" /></p>
+<h2 id="5-git环境配置">5 Git环境配置
+</h2><h3 id="51-添加gitignore文件">5.1 添加.gitignore文件
+</h3><p>​</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HELP.md
+</span></span><span class="line"><span class="cl">target/
+</span></span><span class="line"><span class="cl">!.mvn/wrapper/maven-wrapper.jar
+</span></span><span class="line"><span class="cl">!**/src/main/**
+</span></span><span class="line"><span class="cl">!**/src/test/**
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### STS ###
+</span></span><span class="line"><span class="cl">.apt_generated
+</span></span><span class="line"><span class="cl">.classpath
+</span></span><span class="line"><span class="cl">.factorypath
+</span></span><span class="line"><span class="cl">.project
+</span></span><span class="line"><span class="cl">.settings
+</span></span><span class="line"><span class="cl">.springBeans
+</span></span><span class="line"><span class="cl">.sts4-cache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### IntelliJ IDEA ###
+</span></span><span class="line"><span class="cl">.idea
+</span></span><span class="line"><span class="cl">*.iws
+</span></span><span class="line"><span class="cl">*.iml
+</span></span><span class="line"><span class="cl">*.ipr
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### NetBeans ###
+</span></span><span class="line"><span class="cl">/nbproject/private/
+</span></span><span class="line"><span class="cl">/nbbuild/
+</span></span><span class="line"><span class="cl">/dist/
+</span></span><span class="line"><span class="cl">/nbdist/
+</span></span><span class="line"><span class="cl">/.nb-gradle/
+</span></span><span class="line"><span class="cl">build/
+</span></span><span class="line"><span class="cl">logs/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### VS Code ###
+</span></span><span class="line"><span class="cl">.vscode/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交到git仓库当中</p>
+<h3 id="52-创建开发分支">5.2 创建开发分支
+</h3><p>通常不会在主分支进行开发，本项目在dev开发分支进行开发(每一章节一个)，下边创建开发分支。</p>
+<p>新建一个分支，点击IDEA右下角的分支标识：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E4%BD%8D%E7%BD%AE.png"
+	width="525"
+	height="261"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E4%BD%8D%E7%BD%AE_hu16108885284200772898.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E4%BD%8D%E7%BD%AE_hu3807772892105391588.png 1024w"
+	loading="lazy"
+	
+		alt="创建分支的选项"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="482px"
+	
+></p>
+<p>输入分支名称：</p>
+<p>​								<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BAdev01%E5%88%86%E6%94%AF.png"
+	width="397"
+	height="220"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BAdev01%E5%88%86%E6%94%AF_hu3459101049926597621.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%9B%E5%BB%BAdev01%E5%88%86%E6%94%AF_hu11969808279551907375.png 1024w"
+	loading="lazy"
+	
+		alt="创建dev01分支"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="180"
+		data-flex-basis="433px"
+	
+></p>
+<p>点击create即创建成功，打卡Git log，其中标识了小铅笔的就是当前分支</p>
+<p>然后将分支push到github上即可</p>
+<h2 id="6-基础工程搭建">6 基础工程搭建
+</h2><h3 id="61-工程结构关系">6.1 工程结构关系
+</h3><p>学成在线使用 Maven 来进行项目的管理和构建。整个项目分为三大类工程：父工程、基础工程 和微服务工程。</p>
+<p>​	<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB.png"
+	width="1071"
+	height="814"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB_hu6045182357796876140.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB_hu13869438846597038840.png 1024w"
+	loading="lazy"
+	
+		alt="项目基础工程依赖关系"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="131"
+		data-flex-basis="315px"
+	
+></p>
+<p>每一种类的工程都有不同的作用，下面时对其功能进行说明：</p>
+<ul>
+<li>
+<p>父工程</p>
+<ul>
+<li>
+<p>对依赖包的版本进行管理</p>
+</li>
+<li>
+<p>本身为Pom工程，对子工程进行聚合管理</p>
+</li>
+</ul>
+</li>
+<li>
+<p>基础工程</p>
+<ul>
+<li>
+<p>继承父类工程</p>
+</li>
+<li>
+<p>提供基础类库</p>
+</li>
+<li>
+<p>提供工具类库</p>
+</li>
+</ul>
+</li>
+<li>
+<p>微服务工程</p>
+<ul>
+<li>
+<p>分别从业务、技术方面划分模块，每个模块构建为一个微服务。</p>
+</li>
+<li>
+<p>每个微服务工程依赖基础工程，间接继承父工程。</p>
+</li>
+<li>
+<p>包括：内容管理服务、媒资管理服务、搜索服务、订单支付服务等。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-构建父工程">6.2 构建父工程
+</h3><p>父工程的职责是对依赖包的版本进行管理，本小节创建父工程分两步，第一创建父工程，第二在pom.xml编辑依赖管理。</p>
+<ol>
+<li>
+<p>首先创建父工程，为了对代码更好的进行权限管理，这里我们单独创建父工程。选择Spring Initalizr，填写模块信息：</p>
+<ul>
+<li>
+<p>模块名：xuecheng-plus-parent</p>
+</li>
+<li>
+<p>包名：com.xuecheng</p>
+</li>
+</ul>
+</li>
+<li>
+<p>依赖管理定义</p>
+<p>下边开始编辑xuecheng-plus-parent父工程的依赖管理 。</p>
+<p>父工程中没有代码，不用去依赖其它的包，它的作用是限定其它子工程依赖包的版本号，即在<strong>dependencyManagement</strong> 中去编辑即可。</p>
+<ol>
+<li>
+<p>确定父工程为一个pom工程，在pom.xml中添加如下内容：</p>
+<p><code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></p>
+</li>
+<li>
+<p>编辑依赖的包的版本号、打包插件等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-parent<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>xuecheng-plus-parent<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;description&gt;</span>xuecheng-plus-parent<span class="nt">&lt;/description&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;packaging&gt;</span>pom<span class="nt">&lt;/packaging&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;properties&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;spring-boot.version&gt;</span>2.3.7.RELEASE<span class="nt">&lt;/spring-boot.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;spring-cloud.version&gt;</span>Hoxton.SR9<span class="nt">&lt;/spring-cloud.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;org.mapstruct.version&gt;</span>1.3.1.Final<span class="nt">&lt;/org.mapstruct.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;spring-cloud-alibaba.version&gt;</span>2.2.6.RELEASE<span class="nt">&lt;/spring-cloud-alibaba.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;org.projectlombok.version&gt;</span>1.18.8<span class="nt">&lt;/org.projectlombok.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;javax.servlet-api.version&gt;</span>4.0.1<span class="nt">&lt;/javax.servlet-api.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;fastjson.version&gt;</span>1.2.83<span class="nt">&lt;/fastjson.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;druid-spring-boot-starter.version&gt;</span>1.2.8<span class="nt">&lt;/druid-spring-boot-starter.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;mysql-connector-java.version&gt;</span>8.0.30<span class="nt">&lt;/mysql-connector-java.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;mybatis-plus-boot-starter.version&gt;</span>3.4.1<span class="nt">&lt;/mybatis-plus-boot-starter.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;commons-lang.version&gt;</span>2.6<span class="nt">&lt;/commons-lang.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;minio.version&gt;</span>8.4.3<span class="nt">&lt;/minio.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xxl-job-core.version&gt;</span>2.3.1<span class="nt">&lt;/xxl-job-core.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;swagger-annotations.version&gt;</span>1.5.20<span class="nt">&lt;/swagger-annotations.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;commons-lang3.version&gt;</span>3.10<span class="nt">&lt;/commons-lang3.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;okhttp.version&gt;</span>4.8.1<span class="nt">&lt;/okhttp.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;swagger-spring-boot-starter.version&gt;</span>1.9.0.RELEASE<span class="nt">&lt;/swagger-spring-boot-starter.version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;elasticsearch.version&gt;</span>7.12.1<span class="nt">&lt;/elasticsearch.version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/properties&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependencyManagement&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${spring-cloud.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>spring-boot-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${spring-boot.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.alibaba.cloud<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>spring-cloud-alibaba-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${spring-cloud-alibaba.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- lombok，简化类的构建--&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${org.projectlombok.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- mapstruct 代码生成器，简化java bean之间的映射 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.mapstruct<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>mapstruct-jdk8<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${org.mapstruct.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.mapstruct<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>mapstruct-processor<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${org.mapstruct.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>io.swagger<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>swagger-annotations<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${swagger-annotations.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- Servlet 容器管理 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${javax.servlet-api.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- fastjson ，json解析工具 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>fastjson<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${fastjson.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- druid 连接池管理 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>druid-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${druid-spring-boot-starter.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- mySQL数据库驱动包管理 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${mysql-connector-java.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- mybatis plus 集成Spring Boot启动器 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.baomidou<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>mybatis-plus-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${mybatis-plus-boot-starter.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- mybatis plus 代码生成器 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.baomidou<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>mybatis-plus-generator<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${mybatis-plus-boot-starter.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- 工具类管理 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>commons-lang<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>commons-lang<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${commons-lang.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!-- 分布式文件系统 minIO的客户端API包 --&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>io.minio<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>minio<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${minio.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!--google推荐的一套工具类库--&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.google.guava<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>guava<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>25.0-jre<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!--分布式任务调度--&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.xuxueli<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>xxl-job-core<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${xxl-job-core.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!--Spring boot单元测试--&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${spring-boot.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;exclusions&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;exclusion&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;groupId&gt;</span>org.junit.vintage<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;artifactId&gt;</span>junit-vintage-engine<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/exclusion&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/exclusions&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.squareup.okhttp3<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>okhttp<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${okhttp.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.apache.commons<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>commons-lang3<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${commons-lang3.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>com.spring4all<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>swagger-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${swagger-spring-boot-starter.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.client<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>elasticsearch-rest-high-level-client<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${elasticsearch.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.elasticsearch<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>elasticsearch<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>${elasticsearch.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependencyManagement&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;build&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;finalName&gt;</span>${project.name}<span class="nt">&lt;/finalName&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c">&lt;!--编译打包过虑配置--&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;resources&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;resource&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;directory&gt;</span>src/main/resources<span class="nt">&lt;/directory&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;filtering&gt;</span>true<span class="nt">&lt;/filtering&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;includes&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;include&gt;</span>**/*<span class="nt">&lt;/include&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/includes&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/resource&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;resource&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;directory&gt;</span>src/main/java<span class="nt">&lt;/directory&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;includes&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;include&gt;</span>**/*.xml<span class="nt">&lt;/include&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/includes&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/resource&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/resources&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;plugins&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;plugin&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="c">&lt;!--指定项目源码jdk的版本--&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="c">&lt;!--指定项目编译后的jdk的版本--&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="c">&lt;!--配置注解预编译--&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;annotationProcessorPaths&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;path&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                            <span class="nt">&lt;version&gt;</span>${org.projectlombok.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;/path&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/annotationProcessorPaths&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/configuration&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/plugin&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c">&lt;!--责处理项目资源文件并拷贝到输出目录，如果有额外的资源文件目录则需要配置--&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;plugin&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;artifactId&gt;</span>maven-resources-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;version&gt;</span>3.3.0<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;encoding&gt;</span>utf-8<span class="nt">&lt;/encoding&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="c">&lt;!--使用默认分隔符，resource中可以使用分割符定义过虑的路径--&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;useDefaultDelimiters&gt;</span>true<span class="nt">&lt;/useDefaultDelimiters&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/configuration&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/plugin&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/plugins&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/build&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+</ol>
+<h3 id="63-构建基础工程">6.3 构建基础工程
+</h3><p>基础工程的职责是提供一些系统架构所需要的基础类库以及一此工具类库。</p>
+<ol>
+<li>
+<p>首先创建基础工程xuecheng-plus-base。创建的过程同父工程的创建过程，选择Spring Initalizr，填写模块信息：</p>
+<ul>
+<li>模块名：xuecheng-plus-base</li>
+<li>包名：com.xuecheng</li>
+</ul>
+</li>
+<li>
+<p>修改<strong>pom.xml</strong>文件</p>
+<p>这里需要注意的是xuecheng-plus-base的父工程为xuecheng-plus-parent，xuecheng-plus-base的pom.xml的如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-parent<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;relativePath&gt;</span>../xuecheng-plus-parent<span class="nt">&lt;/relativePath&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/parent&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-base<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.apache.commons<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>commons-lang3<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- fast Json --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>fastjson<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- servlet Api 依赖 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 通用组件 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>commons-lang<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>commons-lang<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>commons-codec<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>commons-codec<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>1.11<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>io.swagger<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>swagger-annotations<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>spring-web<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-validation<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-log4j2<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!--根据扩展名取mimetype--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.j256.simplemagic<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>simplemagic<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>1.17<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.apache.commons<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>commons-lang3<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.google.zxing<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>core<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>3.3.3<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.google.zxing<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>javase<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>3.3.3<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.module<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>jackson-module-parameter-names<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.datatype<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>jackson-datatype-jdk8<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.datatype<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>jackson-datatype-jsr310<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后将父工程和基础工程提交到git上即可。</p>
+</li>
+</ol>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/springcloud/">Springcloud</a>
+        
+            <a href="/tags/springboot/">Springboot</a>
+        
+            <a href="/tags/redis/">Redis</a>
+        
+            <a href="/tags/mysql/">Mysql</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="lazman-ll/lazman-ll.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="running-time">
+        本博客已稳定运行
+            <span id="runningdays" class="running-days"></span>
+        </section>
+        
+    <section class="totalcount">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    发表了2篇文章 · 
+    总计5.28k字
+    </section>
+
+    
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+    <section class="copyright">
+        &copy; 
+        
+        2024 闲人指路
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+ 
+<script>
+    let s1 = '2024-10-01'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
+</script>
+    </body>
+</html>
