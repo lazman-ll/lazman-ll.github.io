@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这是学成在线的第二步骤，内容管理模块的建立">
+<title>学成在线内容管理模块</title>
+
+<link rel='canonical' href='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.37d9bdf3a89f479a5f498e53a878dcaba559ac5958c566bac2e3223da26e5dfc.css"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><meta property='og:title' content="学成在线内容管理模块">
+<meta property='og:description' content="这是学成在线的第二步骤，内容管理模块的建立">
+<meta property='og:url' content='https://lazman-ll.github.io/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/'>
+<meta property='og:site_name' content='闲人指路'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java' /><meta property='article:tag' content='springcloud' /><meta property='article:tag' content='springboot' /><meta property='article:tag' content='redis' /><meta property='article:tag' content='mysql' /><meta property='article:published_time' content='2024-10-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-10-04T00:00:00&#43;00:00'/><meta property='og:image' content='https://lazman-ll.github.io/github-hugo.png' />
+<meta name="twitter:title" content="学成在线内容管理模块">
+<meta name="twitter:description" content="这是学成在线的第二步骤，内容管理模块的建立"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lazman-ll.github.io/github-hugo.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+        
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu2869755653433789774.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">闲人指路</a></h1>
+            <h2 class="site-description">欢迎来到我的博客世界，这里会分享一些我的学习记录以及好玩的网站</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/lazman-ll'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/agitated'
+                        target="_blank"
+                        title="码云"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Gitee</title><path d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.016 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.63c0 .327.266.592.593.592h5.63c.982 0 1.778-.796 1.778-1.778v-.296a.593.593 0 0 0-.592-.593h-4.15a.592.592 0 0 1-.592-.592v-1.482a.593.593 0 0 1 .593-.592h6.815c.327 0 .593.265.593.592v3.408a4 4 0 0 1-4 4H5.926a.593.593 0 0 1-.593-.593V9.778a4.444 4.444 0 0 1 4.445-4.444h8.296Z"/></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-模块的需求分析">1. 模块的需求分析</a>
+      <ol>
+        <li><a href="#11-什么是需求分析">1.1 什么是需求分析</a></li>
+        <li><a href="#12模块介绍">1.2模块介绍</a></li>
+        <li><a href="#13-业务流程">1.3 业务流程</a></li>
+        <li><a href="#14-界面原型">1.4 界面原型</a></li>
+        <li><a href="#15-数据模型">1.5 数据模型</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-创建模块工程">2. 创建模块工程</a>
+      <ol>
+        <li><a href="#21-模块工程结构">2.1 模块工程结构</a></li>
+        <li><a href="#22-创建模块工程">2.2 创建模块工程</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-课程查询">3. 课程查询</a>
+      <ol>
+        <li><a href="#31-需求分析">3.1 需求分析</a>
+          <ol>
+            <li><a href="#311-业务流程">3.1.1 业务流程</a></li>
+            <li><a href="#312-数据模型">3.1.2 数据模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#32-创建数据库表及po类型">3.2 创建数据库表及PO类型</a>
+          <ol>
+            <li><a href="#321-创建数据库表">3.2.1 创建数据库表</a></li>
+            <li><a href="#322-生成po类">3.2.2 生成PO类</a></li>
+          </ol>
+        </li>
+        <li><a href="#33-设计接口">3.3 设计接口</a>
+          <ol>
+            <li><a href="#331-接口设计分析">3.3.1 接口设计分析</a></li>
+            <li><a href="#332-定义模型类">3.3.2 定义模型类</a></li>
+            <li><a href="#333-定义接口">3.3.3 定义接口</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/">
+                
+                    <img src="/github-hugo.png" loading="lazy" alt="Featured image of post 学成在线内容管理模块" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF/" style="background-color: #2a9d8f; color: #fff;">
+                学成在线
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/">学成在线内容管理模块</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            这是学成在线的第二步骤，内容管理模块的建立
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-10-04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 15 分钟
+                </time>
+            </div>
+        
+        
+        <div>
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-description"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>
+            <time class="article-words">
+              7257 字
+            </time>
+         </div>
+       
+    </footer>
+    
+
+    
+
+
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本模块主要是对学成在线项目的课程信息做管理，包括了课程的查询，增加等内容</p>
+<h2 id="1-模块的需求分析">1. 模块的需求分析
+</h2><h3 id="11-什么是需求分析">1.1 什么是需求分析
+</h3><ul>
+<li>百度百科对需求分析的定义如下：</li>
+</ul>
+<blockquote>
+<p>需求分析也称为软件需求分析、系统需求分析或需求分析工程等，是开发人员经过深入细致的调研和分析，准确理解用户和项目的功能、性能、可靠性等具体要求，将用户非形式的需求表述转化为完整的需求定义，从而确定系统必须做什么的过程。</p>
+</blockquote>
+<ul>
+<li>
+<p>简单理解就是要搞清楚问题域，问题域就是用户的需求，软件要为用户解决什么问题，实现哪些功能，满足什么样的性能要求。</p>
+</li>
+<li>
+<p>如何作需求分析</p>
+<ol>
+<li>
+<p>首先确认用户需求</p>
+<ul>
+<li>
+<p>用户需求即用户的原始需求。通过用户访谈、问卷调查、开会讨论、查阅资料等调研手段梳理用户的原始需求。</p>
+<p>产品人员根据用户需求会绘制界面原型，通过界面原型再和用户确认需求。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>确认关键问题</p>
+<ul>
+<li>
+<p>用户的原始需求可能 是含糊不清的，需求分析要从繁杂的问题中梳理出关键问题。比如：教学机构的老师想要将课程发布到网上，这是原始需求，根据这个用户需求我们需要进行扩展分析，扩展出几下几点：</p>
+<ol>
+<li>课程发布需要发布哪些信息</li>
+<li>如果发布了不良信息怎么办？</li>
+<li>课程发布后用户怎么查看课程？</li>
+</ol>
+</li>
+<li>
+<p>例如：课程发布需要课程名称、课程介绍、课程价格、课程图片、师资等信息。继续延申分析：这么多课程信息进行归类，方便用户编辑，分为课程基本信息、课程营销信息、课程师资等信息。</p>
+</li>
+<li>
+<p>按照这样的思路对用户需求逐项分析，梳理出若干问题，再从中找到关键问题。比如：上边对课程信息分类后，哪些是关键信息，课程名称、课程图片、课程介绍等基本信息为关键信息，所以发布课程的第一步要编写课程基本信息。</p>
+</li>
+<li>
+<p>找到了关键问题，下一步就可以进行数据建模，创建课程基本信息表，并设计其中的字段。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>梳理业务流程</p>
+<ul>
+<li>业务流程是由一个或多个用户参与完成为了完成一个目标所进行的一系列的业务操作，不论是整个系统还是一个模块通常首先分析核心的业务流程，比如：内容管理模块的核心业务流程是课程发布，本项目的核心业务流程是学生选课学习流程。</li>
+</ul>
+</li>
+<li>
+<p>数据建模</p>
+<ul>
+<li>数据建模要根据分析的关键问题将其相关的信息全部建模。比如：根据发布课程的用户需求，可创建课程基本信息表、课程营销信息表、课程师资表、课程发布记录表、课程审核记录表等。</li>
+</ul>
+</li>
+<li>
+<p>编写需求规格说明书</p>
+<ul>
+<li>
+<p>需求分析阶段的成果物是需求分析规格说明书，针对每一个问题编写需求用例，需求用例包括：功能名称、功能描述、参与者、基本事件流程、可选事件流、数据描述、前置条件、后置条件等内容。</p>
+</li>
+<li>
+<p>这里以添加课程的需求为例：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">项目</th>
+          <th style="text-align: left">添加课程</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">功能名称</td>
+          <td style="text-align: left">添加课程</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">功能描述</td>
+          <td style="text-align: left">添加课程基本信息</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">参与者</td>
+          <td style="text-align: left">教学机构管理员</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">前置条件</td>
+          <td style="text-align: left">教学机构管理只允许向自己机构添加课程 拥有添加课程的权限</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">基本事件流程</td>
+          <td style="text-align: left">1、登录教学机构平台 2、进入课程列表页面 3、点击添加课程按钮进入添加课程界面 4、填写课程基本信息 5、点击提交。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">可选事件流程</td>
+          <td style="text-align: left">成功：提示添加成功，跳转到课程营销信息添加界面 失败：提示具体的失败信息，用户根据失败信息进行修改。</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">数据描述</td>
+          <td style="text-align: left">课程基本信息：课程id、课程名称、课程介绍、课程大分类、课程小分类、课程等级、课程图片、所属机构、课程创建时间、课程修改时间、课程状态</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">后置条件</td>
+          <td style="text-align: left">向课程基本信息插入一条记录</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">补充说明</td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="12模块介绍">1.2模块介绍
+</h3><ul>
+<li>
+<p>内容管理这个词存在于很多软件系统，什么是内容管理 ？</p>
+</li>
+<li>
+<p>百度百科解释如下：</p>
+<blockquote>
+<p>内容管理系统（content management system，CMS），是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。这里指的“内容”可能包括文件、表格、图片、数据库中的数据甚至视频等一切你想要发布到Internet、Intranet以及Extranet网站的信息。</p>
+</blockquote>
+</li>
+<li>
+<p>本项目作为一个大型的在线教育平台，其内容管理模块主要对<strong>课程及相关内容进行管理</strong>，包括：课程的基本信息、课程图片、课程师资信息、课程的授课计划、课程视频、课程文档等内容的管理。</p>
+</li>
+</ul>
+<h3 id="13-业务流程">1.3 业务流程
+</h3><ul>
+<li>
+<p>内容管理的业务由教学机构人员和平台的运营人员共同完成。</p>
+<ul>
+<li>
+<p>教学机构人员的业务流程如下：</p>
+<ol>
+<li>登录教学机构。</li>
+<li>维护课程信息，添加一门课程需要编辑课程的基本信息、上传课程图片、课程营销信息、课程计划、上传课程视频、课程师资信息等内容。</li>
+<li>课程信息编辑完成，通过课程预览确认无误后提交课程审核。</li>
+<li>待运营人员对课程审核通过后方可进行课程发布。</li>
+</ol>
+</li>
+<li>
+<p>运营人员的业务流程如下：</p>
+<ol>
+<li>查询待审核的课程信息。</li>
+<li>审核课程信息。</li>
+<li>提交审核结果。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>下图是课程编辑与发布的整体流程</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E7%BC%96%E8%BE%91%E4%B8%8E%E5%8F%91%E5%B8%83%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.png"
+	width="1748"
+	height="1492"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E7%BC%96%E8%BE%91%E4%B8%8E%E5%8F%91%E5%B8%83%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B_hu11135399436588184885.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E7%BC%96%E8%BE%91%E4%B8%8E%E5%8F%91%E5%B8%83%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B_hu9399211848412404414.png 1024w"
+	loading="lazy"
+	
+		alt="课程编辑与发布的整体流程"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="117"
+		data-flex-basis="281px"
+	
+></p>
+</li>
+</ul>
+<h3 id="14-界面原型">1.4 界面原型
+</h3><ul>
+<li>产品工程师根据用户需求制作产品界面原型，开发工程师除了根据用户需求进行需求分析以外，还会根据界面原型上的元素信息进行需求分析。</li>
+</ul>
+<h3 id="15-数据模型">1.5 数据模型
+</h3><ul>
+<li>
+<p>数据模型就是对应的数据表的设计，内容管理模块涉及9张基础表，如下所示：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png"
+	width="1390"
+	height="671"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B_hu6531519426017695515.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B_hu5971597498775965977.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块的数据模型"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="207"
+		data-flex-basis="497px"
+	
+></p>
+</li>
+</ul>
+<h2 id="2-创建模块工程">2. 创建模块工程
+</h2><h3 id="21-模块工程结构">2.1 模块工程结构
+</h3><ul>
+<li>
+<p>在第一章节创建了项目的父工程以及项目基础工程，如下图：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E9%A1%B9%E7%9B%AE%E7%88%B6%E5%B7%A5%E7%A8%8B%E5%8F%8A%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B.png"
+	width="1071"
+	height="814"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E9%A1%B9%E7%9B%AE%E7%88%B6%E5%B7%A5%E7%A8%8B%E5%8F%8A%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B_hu6045182357796876140.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E9%A1%B9%E7%9B%AE%E7%88%B6%E5%B7%A5%E7%A8%8B%E5%8F%8A%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B_hu13869438846597038840.png 1024w"
+	loading="lazy"
+	
+		alt="项目父工程及项目基础工程"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="131"
+		data-flex-basis="315px"
+	
+></p>
+</li>
+<li>
+<p>下面就要创建内容管理模块的工程结构。本项目是一个前后端分离项目，前端与后端开发人员之间主要依据接口进行开发。下图是前后端交互的流程图：</p>
+<ol>
+<li>前端请求后端服务提供的接口。（通常为http协议 ）</li>
+<li>后端服务的控制层Controller接收前端的请求。</li>
+<li>Contorller层调用Service层进行业务处理。</li>
+<li>Service层调用Dao持久层对数据持久化。</li>
+</ol>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E6%B5%81%E8%BF%87%E7%A8%8B.png"
+	width="1709"
+	height="450"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E6%B5%81%E8%BF%87%E7%A8%8B_hu12680686531761929117.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E6%B5%81%E8%BF%87%E7%A8%8B_hu6909555895191266076.png 1024w"
+	loading="lazy"
+	
+		alt="前后端交流过程"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="379"
+		data-flex-basis="911px"
+	
+></p>
+</li>
+<li>
+<p>整个流程分为前端、接口层和业务层三部分。故模块工程的结构如下所示：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84.png"
+	width="974"
+	height="378"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84_hu15924875053784914664.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84_hu9944260427559776588.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块工程结构"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="257"
+		data-flex-basis="618px"
+	
+></p>
+<ul>
+<li>xuecheng-plus-content-api：接口工程，为前端提供接口。</li>
+<li>xuecheng-plus-content-service: 业务工程，为接口工程提供业务支撑。</li>
+<li>xuecheng-plus-content-model: 数据模型工程，存储数据模型类、数据传输类型等。</li>
+</ul>
+</li>
+<li>
+<p>将项目父工程及项目基础工程与之结合可得下图：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%88%B6%E5%B7%A5%E7%A8%8B%E3%80%81%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E5%8F%8A%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png"
+	width="973"
+	height="446"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%88%B6%E5%B7%A5%E7%A8%8B%E3%80%81%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E5%8F%8A%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE_hu12635247826619187662.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%88%B6%E5%B7%A5%E7%A8%8B%E3%80%81%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B%E5%8F%8A%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE_hu14320930189702217291.png 1024w"
+	loading="lazy"
+	
+		alt="父工程、基础工程及内容管理工程结构图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+></p>
+<ul>
+<li><strong>xuecheng-plus-content</strong>：内容管理模块工程，负责聚合xuecheng-plus-content-api、xuecheng-plus-content-service、xuecheng-plus-content-model。</li>
+</ul>
+<blockquote>
+<ul>
+<li>
+<p>聚合项目又称为多模块项目，这种结构的目的是为了统一构建项目，也就是说我对根项目的任何mvn 命令操作，都会相应的执行到每一个被聚合的module项目中。</p>
+<ul>
+<li>聚合项目，根模块的打包方式必须为pom。</li>
+<li>通过 <code>&lt;module&gt;</code> 标签指定被聚合的模块。</li>
+<li><strong>被聚合的模块根本无法感知到根模块的存在。</strong></li>
+</ul>
+</li>
+<li>
+<p>父子模块这种项目结构，本质上就是继承关系。聚合模块结构没有上下级区分，但这里的父子模块就要区分上下级了（这里的上下级不是指文件目录的上下级），子模块会继承父模块的相关依赖配置。</p>
+<ul>
+<li>
+<p>父模块的打包方式必须为pom。</p>
+</li>
+<li>
+<p>子模块需要通过 <code>&lt;parent&gt;</code> 标签指定父模块的坐标。然后自由选择需要的依赖，如果此依赖在父模块已指定版本，则子模块不需要再管理版本。</p>
+</li>
+<li>
+<p>父模块的groupId和version会传递到子模块，父子模块作为一个整体，子模块不需要再声明，仅需要指定自己独有的artifactId即可，当然如果你依赖的父模块和你的项目不是同一个groupId时，你也可以指定子模块的groupId和version；</p>
+</li>
+<li>
+<p>父模块的依赖配置会传递到子模块，子模块不需要再单独引入依赖；</p>
+</li>
+<li>
+<p>父模块可以通过<code>&lt;dependencyManagement&gt;</code>管理依赖的版本，子模块可以自由灵活的选择需要的依赖，不需要再关心版本的问题。</p>
+</li>
+<li>
+<p><strong>父子模块正好相反，父模块根本无法感知到哪个子模块把它当作爸爸。</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>最佳实战</p>
+<ul>
+<li>在我们实际开发中，一般都是将聚合和父子这两种关系混合使用</li>
+<li>不论父子模块还是聚合模块，根模块的打包方式都必须是pom，下面的模块可以是jar或者war这两种打包方式。</li>
+<li>聚合模块这种项目结构，仅仅是为了方便统一管理操作所有的模块。根模块和它内部<code>&lt;module&gt;</code> 标签内的模块是一个整体，项目目录层级上可以不要求一定上下级，但必须保持一定的层级联系。你不能用自己创建的项目去管理操作<strong>spring</strong>的项目。</li>
+<li>父子模块这种项目结构，仅仅是为了方便子模块对依赖的管理，子模块通过<code>&lt;parent&gt; </code>标签，引入父模块的配置去约束子模块的依赖版本。也可以抽出共同的依赖给到父模块，子模块去继承它，减少每个子模块冗余的配置。项目层级没有要求，你可以引入任意的依赖当作父模块，比如<strong>spring-boot-starter</strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="22-创建模块工程">2.2 创建模块工程
+</h3><ol>
+<li>
+<p>首先在项目根目录创建内容管理模块的父工程<strong>xuecheng-plus-content</strong></p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%88%9B%E5%BB%BA%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%88%B6%E5%B7%A5%E7%A8%8B.png"
+	width="1196"
+	height="989"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%88%9B%E5%BB%BA%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%88%B6%E5%B7%A5%E7%A8%8B_hu9060920640690089008.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%88%9B%E5%BB%BA%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%88%B6%E5%B7%A5%E7%A8%8B_hu17725135708685449827.png 1024w"
+	loading="lazy"
+	
+		alt="创建内容管理模块父工程"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="120"
+		data-flex-basis="290px"
+	
+></p>
+<ul>
+<li>
+<p>创建完成，只保留pom.xml文件，删除多余的文件。内容管理父工程的主要职责是聚合内容管理接口和内容管理接口实现两个工程，它的父工程是<strong>xuecheng-plus-parent</strong>。<strong>pom.xml</strong>如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 父工程为项目父工程xuecheng-plus-parent --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-parent<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;relativePath&gt;</span>../xuecheng-plus-parent<span class="nt">&lt;/relativePath&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/parent&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>xuecheng-plus-content<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;description&gt;</span>xuecheng-plus-content<span class="nt">&lt;/description&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 其本身既是内容管理其他模块的父工程也是模块聚合的跟工程 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 所以打包方式必须为pom --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;packaging&gt;</span>pom<span class="nt">&lt;/packaging&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 聚合的模块 --&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;modules&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;module&gt;</span>xuecheng-plus-content-api<span class="nt">&lt;/module&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;module&gt;</span>xuecheng-plus-content-model<span class="nt">&lt;/module&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;module&gt;</span>xuecheng-plus-content-service<span class="nt">&lt;/module&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;/modules&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>由于xuecheng-plus-content-api、xuecheng-plus-content-service及xuecheng-plus-content-model三个工程还没有创建所以modules报错。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>在xuecheng-plus-content下创建xuecheng-plus-content-model数据模型工程。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA.png"
+	width="1222"
+	height="996"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA_hu9474603968121861565.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA_hu15005264717696265678.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块数据模型工程的创建"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="122"
+		data-flex-basis="294px"
+	
+></p>
+<ul>
+<li>
+<p>创建完成，只保留包和pom.xml文件 ，删除多余的文件。修改pom.xml文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/parent&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content-model<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 基本所有工程都会依赖于基础工程 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 引入基础工程依赖 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-base<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>在xuecheng-plus-content下创建xuecheng-plus-content-service接口实现工程。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97service%E5%B7%A5%E7%A8%8B%E5%88%9B%E5%BB%BA.png"
+	width="1199"
+	height="997"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97service%E5%B7%A5%E7%A8%8B%E5%88%9B%E5%BB%BA_hu13422263572273732299.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97service%E5%B7%A5%E7%A8%8B%E5%88%9B%E5%BB%BA_hu7759540348966341154.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块service工程创建"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="120"
+		data-flex-basis="288px"
+	
+></p>
+<ul>
+<li>
+<p>创建完成，只保留包(即src包)和pom.xml文件 ，删除多余的文件，pom.xml如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/parent&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content-service<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content-model<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">     <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>在xuecheng-plus-content下创建xuecheng-plus-content-api接口工程。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97api%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA.png"
+	width="1194"
+	height="999"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97api%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA_hu15024974005469374710.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97api%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA_hu2180509032776361911.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块api工程的创建"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="119"
+		data-flex-basis="286px"
+	
+></p>
+<ul>
+<li>
+<p>创建完成，只保留包(即src包)和pom.xml文件 ，删除多余的文件，pom.xml如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;parent&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/parent&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content-api<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 引入service包会传递依赖项目基础工程 --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>com.xuecheng<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>xuecheng-plus-content-service<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>xuecheng-plus-content-api接口工程的父工程是xuecheng-plus-content，它依赖了xuecheng-plus-base基础工程。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>到此内容管理模块的四个工程创建完毕，工程结构图如下：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97idea%E4%B8%AD%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png"
+	width="796"
+	height="549"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97idea%E4%B8%AD%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE_hu5876274979711612862.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97idea%E4%B8%AD%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE_hu7128334022545196326.png 1024w"
+	loading="lazy"
+	
+		alt="内容管理模块idea中的工程结构图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="347px"
+	
+></p>
+</li>
+</ol>
+<h2 id="3-课程查询">3. 课程查询
+</h2><h3 id="31-需求分析">3.1 需求分析
+</h3><h4 id="311-业务流程">3.1.1 业务流程
+</h4><ol>
+<li>教学机构人员点击课程管理首先进入课程查询界面</li>
+<li>在课程进行列表查询页面输入查询条件查询课程信息
+<ul>
+<li>当不输入查询条件时输入全部课程信息。</li>
+<li>输入查询条件查询符合条件的课程信息。</li>
+<li>约束：本教学机构查询本机构的课程信息。</li>
+</ul>
+</li>
+</ol>
+<h4 id="312-数据模型">3.1.2 数据模型
+</h4><ul>
+<li>
+<p>课程查询功能涉及的数据表有两个：课程基本信息表和课程营销表</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E8%A1%A8.png"
+	width="1244"
+	height="497"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E8%A1%A8_hu11479044426240937404.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E8%A1%A8_hu8793412680146688574.png 1024w"
+	loading="lazy"
+	
+		alt="课程基本信息表"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="250"
+		data-flex-basis="600px"
+	
+></p>
+</li>
+</ul>
+<p>​	<img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80%E8%A1%A8.png"
+	width="1241"
+	height="247"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80%E8%A1%A8_hu14718089465127078899.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%90%A5%E9%94%80%E8%A1%A8_hu12177484466806878603.png 1024w"
+	loading="lazy"
+	
+		alt="课程营销表"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="502"
+		data-flex-basis="1205px"
+	
+></p>
+<ul>
+<li>下边从查询条件、查询列表两个方面分析数据模型
+<ol>
+<li>
+<p>查询条件：</p>
+<ul>
+<li>
+<p>包括：课程名称、课程审核状态、课程发布状态</p>
+</li>
+<li>
+<p>课程名称：可以模糊搜索</p>
+</li>
+<li>
+<p>课程审核状态：未提交、已提交、审核通过、审核未通过</p>
+</li>
+<li>
+<p>课程发布状态：未发布、已发布、已下线</p>
+</li>
+<li>
+<p>因为是分页查询所以查询条件中还要包括当前页码、每页显示记录数。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>查询结果：</p>
+<ul>
+<li>查询结果中包括：课程id、课程名称、任务数、创建时间、是否付费、审核状态、类型，操作</li>
+<li>任务数：该课程所包含的课程计划数，即课程章节数。</li>
+<li>是否付费：课程包括免费、收费两种。</li>
+<li>类型：录播、直播。</li>
+<li>因为是分页查询所以查询结果中还要包括总记录数、当前页、每页显示记录数。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="32-创建数据库表及po类型">3.2 创建数据库表及PO类型
+</h3><h4 id="321-创建数据库表">3.2.1 创建数据库表
+</h4><ul>
+<li>黑马所给的虚拟机中已经将数据库表全都建好，无需我们自己建表</li>
+<li>若是想要自己建表，可以直接执行其给的sql语句文件。</li>
+</ul>
+<h4 id="322-生成po类">3.2.2 生成PO类
+</h4><ul>
+<li>
+<p>PO即持久对象(Persistent Object)，它们是由一组属性和属性的get和set方法组成，PO对应于数据库的表。</p>
+</li>
+<li>
+<p>在开发持久层代码时需要根据数据表编写PO类，在实际开发中通常使用代码生成器（工具）生成PO类的代码。由于在需求分析阶段对数据模型进行分析，PO类对应于数据模型，所以在需求分析阶段即可使用工具生成PO类，为下面的接口定义准备好模型类。</p>
+</li>
+<li>
+<p>在企业开发中通常使用代码生成工具去自动生成这些文件，本项目使用mybatis-plus的generator工程生成PO类、Mapper接口、Mapper的xml文件，地址在：<a class="link" href="https://github.com/baomidou/generator"  target="_blank" rel="noopener"
+    >generator工程所在地址</a></p>
+</li>
+<li>
+<p>本项目可直接使用黑马提供的<strong>xuecheng-plus-generator</strong>工程，将其解压后，直接复制到项目的根目录下，并在idea中打开<strong>xuecheng-plus-generator</strong>工程的<strong>pom.xml</strong>，右键 点击“<strong>Add as Maven Project</strong>” 自动识别<strong>maven</strong>工程，即可。</p>
+</li>
+<li>
+<p>本次生成内容管理模块的PO类、Mapper接口和Mapper的xml文件 ，找到ContentCodeGenerator类，如下图：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/mp%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8.png"
+	width="565"
+	height="538"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/mp%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8_hu5119009417555344105.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/mp%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8_hu11043141621195843344.png 1024w"
+	loading="lazy"
+	
+		alt="mp代码生成器"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="105"
+		data-flex-basis="252px"
+	
+></p>
+<ol>
+<li>
+<p>修改ContentCodeGenerator类中的信息，包括：数据库地址、数据库账号、数据库密码、生成的表、生成路径，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">		</span><span class="c1">//数据库账号</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DATA_SOURCE_USER_NAME</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;root&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//数据库密码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DATA_SOURCE_PASSWORD</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;mysql&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//生成的表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">TABLE_NAMES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_base&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_market&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_teacher&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_category&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;teachplan&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;teachplan_media&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_publish&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;course_publish_pre&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// TODO 默认生成entity，需要生成DTO修改此变量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 一般情况下要先生成 DTO类 然后修改此参数再生成 PO 类。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">IS_DTO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">....</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">//生成路径</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">gc</span><span class="p">.</span><span class="na">setOutputDir</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;user.dir&#34;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;/xuecheng-plus-generator/src/main/java&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">....</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 数据库配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">DataSourceConfig</span><span class="w"> </span><span class="n">dsc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DataSourceConfig</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">dsc</span><span class="p">.</span><span class="na">setDbType</span><span class="p">(</span><span class="n">DbType</span><span class="p">.</span><span class="na">MYSQL</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">dsc</span><span class="p">.</span><span class="na">setUrl</span><span class="p">(</span><span class="s">&#34;jdbc:mysql://192.168.101.65:3306/xcplus_&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">SERVICE_NAME</span><span class="o">+</span><span class="s">&#34;166&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;?serverTimezone=UTC&amp;useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf8&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改完成，执行该类的main方法，自动生成content包，如下：</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%94%9F%E6%88%90%E7%9A%84%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84po%E7%B1%BB.png"
+	width="367"
+	height="320"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%94%9F%E6%88%90%E7%9A%84%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84po%E7%B1%BB_hu7276270292592612208.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E7%94%9F%E6%88%90%E7%9A%84%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84po%E7%B1%BB_hu15964681920012182731.png 1024w"
+	loading="lazy"
+	
+		alt="生成的内容管理模块的po类"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="114"
+		data-flex-basis="275px"
+	
+></p>
+</li>
+<li>
+<p>在该包下自动生成了内容管理模块的controller、mapper、po及service相关代码，这里我们只需要po类。将po类拷贝到model工程中的po包下。</p>
+</li>
+<li>
+<p>打开一个PO类发现编译报错，这是缺少依赖包导致，本项目使用的持久层框架是MyBatisPlus，在生成的po类中加了一些MyBatisPlus框架的注解，这里需要添加MyBatisPlus框架的依赖，消除错误。下边在model工程添加依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!--存在mybatisplus注解添加相关注解保证不报错--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;groupId&gt;</span>com.baomidou<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;artifactId&gt;</span>mybatis-plus-annotation<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;version&gt;</span>${mybatis-plus-boot-starter.version}<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+</ul>
+<h3 id="33-设计接口">3.3 设计接口
+</h3><h4 id="331-接口设计分析">3.3.1 接口设计分析
+</h4><ul>
+<li>
+<p>设计一个接口需要包括以下几个方面：</p>
+<ol>
+<li>
+<p>协议</p>
+<ul>
+<li>
+<p>通常协议采用HTTP，查询类接口通常为get或post，查询条件较少的使用get，较多的使用post。本接口使用 http post。</p>
+</li>
+<li>
+<p>还要确定content-type，参数以什么数据格式提交，结果以什么数据格式响应。一般情况没有特殊情况结果以json 格式响应。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>分析请求参数</p>
+<ul>
+<li>根据前边对数据模型的分析，请求参数为：课程名称、课程审核状态、当前页码、每页显示记录数。根据分析的请求参数定义模型类。</li>
+</ul>
+</li>
+<li>
+<p>分析响应结果</p>
+<ul>
+<li>
+<p>根据前边对数据模型的分析，响应结果为数据列表加一些分页信息（总记录数、当前页、每页显示记录数）。</p>
+</li>
+<li>
+<p>数据列表中数据的属性包括：课程id、课程名称、任务数、创建时间、审核状态、类型。</p>
+</li>
+</ul>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>注意：查询结果中的审核状态为数据字典中的代码字段，前端会根据审核状态代码找到对应的名称显示。根据分析的响应结果定义模型类。</p>
+</blockquote>
+</li>
+<li>
+<p>分析完成，使用SpringBoot注解开发一个Http接口。</p>
+</li>
+<li>
+<p>使用接口文档工具查看接口的内容。</p>
+</li>
+<li>
+<p>接口中调用Service方法完成业务处理。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>接口请求示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">course</span><span class="o">/</span><span class="n">list</span><span class="o">?</span><span class="n">pageNo</span><span class="o">=</span><span class="n">2</span><span class="o">&amp;</span><span class="n">pageSize</span><span class="o">=</span><span class="n">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">###</span><span class="n">请求参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;auditStatus&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;202002&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;courseName&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;publishStatus&#34;</span><span class="p">:</span><span class="s">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">###</span><span class="n">成功响应结果</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;items&#34;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;id&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">26</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;companyId&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">1232141425</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;companyName&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;spring cloud实战&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;users&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;所有人&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;tags&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;mt&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;1-3&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;mtName&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;st&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;1-3-2&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;stName&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;grade&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;200003&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;teachmode&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;201001&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;description&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;本课程主要从四个章节进行讲解： 1.微服务架构入门 2.spring cloud 基础入门 3.实战Spring Boot 4.注册中心eureka。&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;pic&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;https://cdn.educba.com/academy/wp-content/uploads/2018/08/Spring-BOOT-Interview-questions.jpg&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;createDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;2019-09-04 09:56:19&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;changeDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;2021-12-26 22:10:38&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;createPeople&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;changePeople&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;auditStatus&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;202002&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;auditMind&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;auditNums&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;auditDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;auditPeople&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;status&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">1</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;coursePubId&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="s">&#34;coursePubDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">]</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;counts&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">23</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;page&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">2</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s">&#34;pageSize&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="332-定义模型类">3.3.2 定义模型类
+</h4></li>
+<li>
+<p>根据接口分析需要定义模型类接收请求的参数，并定义模型类用于响应结果。</p>
+<ol>
+<li>
+<p>分页查询模型类</p>
+<ul>
+<li>
+<p>由于分页查询这一类的接口在项目较多，这里针对分页查询的参数（当前页码、每页显示记录数）单独在xuecheng-plus-base基础工程中定义。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.xuecheng.base.model</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.ToString</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.extern.java.Log</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @description 分页查询通用参数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @author Mr.M
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @date 2022/9/6 14:02
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @version 1.0
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@AllArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@NoArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PageParams</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//当前页码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiModelProperty</span><span class="p">(</span><span class="s">&#34;当前页码&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">pageNo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//每页记录数默认值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiModelProperty</span><span class="p">(</span><span class="s">&#34;每页记录数&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>由于上边类中用到了lombok注解所以在base工程添加依赖包如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>org.projectlombok<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>lombok<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/dependency&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependencies&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>查询条件模型类</p>
+<ul>
+<li>
+<p>除了分页查询参数，剩下的就是课程查询的特有参数，此时需要在内容管理的model工程中定义课程查询参数模型类。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.xuecheng.content.model.dto</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.annotations.ApiModelProperty</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @description 课程查询参数Dto
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nd">@Data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">QueryCourseParamsDto</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//审核状态</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nd">@ApiModelProperty</span><span class="p">(</span><span class="s">&#34;审核状态&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">auditStatus</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">//课程名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nd">@ApiModelProperty</span><span class="p">(</span><span class="s">&#34;课程名称&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">courseName</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//发布状态</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nd">@ApiModelProperty</span><span class="p">(</span><span class="s">&#34;发布状态&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">publishStatus</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>响应模型类</p>
+<ul>
+<li>
+<p>根据接口分析，下边定义响应结果模型类。针对分页查询结果经过分析也存在固定的数据和格式，所以在base工程定义一个基础的模型类。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.xuecheng.base.model</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.Serializable</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 分页查询结果模型类
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@NoArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@AllArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PageResult</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 数据列表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//总记录数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">counts</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//当前页码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">page</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//每页记录数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">pageSize</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>此模型类中定义了List属性，此属性存放数据列表，且支持泛型，课程查询接口的返回类型可以是此模型类型。课程查询接口使用的泛型为相应的<strong>CourseBase</strong>，即生成的课程基本信息表的PO类。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="333-定义接口">3.3.3 定义接口
+</h4>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/springcloud/">Springcloud</a>
+        
+            <a href="/tags/springboot/">Springboot</a>
+        
+            <a href="/tags/redis/">Redis</a>
+        
+            <a href="/tags/mysql/">Mysql</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/pawel-czerwinski-8uZPynIu-rQ-unsplash.c514d916917173a48a42e0114b469961_hu7626638945853200361.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 学成在线环境搭建"
+                        
+                        data-hash="md5-xRTZFpFxc6SKQuARS0aZYQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">学成在线环境搭建</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="lazman-ll/lazman-ll.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="running-time">
+        本博客已稳定运行
+            <span id="runningdays" class="running-days"></span>
+        </section>
+        
+    <section class="totalcount">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    发表了3篇文章 · 
+    总计12.54k字
+    </section>
+
+    
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+    <section class="copyright">
+        &copy; 
+        
+        2024 闲人指路
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+ 
+<script>
+    let s1 = '2024-10-01'; 
+    s1 = new Date(s1.replace(/-/g, "/"));
+    let s2 = new Date();
+    let timeDifference = s2.getTime() - s1.getTime();
+
+    let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+    let result = days + "天" + hours + "小时" + minutes + "分钟";
+    document.getElementById('runningdays').innerHTML = result;
+</script>
+
+
+
+    </body>
+</html>
