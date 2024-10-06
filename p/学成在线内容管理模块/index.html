@@ -429,6 +429,78 @@
         <li><a href="#bug修改">Bug修改</a></li>
       </ol>
     </li>
+    <li><a href="#删除课程计划">删除课程计划</a>
+      <ol>
+        <li><a href="#需求分析-6">需求分析</a>
+          <ol>
+            <li><a href="#业务流程-6">业务流程</a></li>
+            <li><a href="#数据模型-6">数据模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口定义-5">接口定义</a></li>
+        <li><a href="#接口开发-4">接口开发</a>
+          <ol>
+            <li><a href="#mapper层开发">Mapper层开发</a></li>
+            <li><a href="#service层开发">Service层开发</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口测试-6">接口测试</a></li>
+      </ol>
+    </li>
+    <li><a href="#课程计划排序">课程计划排序</a>
+      <ol>
+        <li><a href="#需求分析-7">需求分析</a>
+          <ol>
+            <li><a href="#业务流程-7">业务流程</a></li>
+            <li><a href="#数据模型-7">数据模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口定义-6">接口定义</a></li>
+        <li><a href="#接口开发-5">接口开发</a>
+          <ol>
+            <li><a href="#mapper层开发-1">Mapper层开发</a></li>
+            <li><a href="#service层开发-1">Service层开发</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口测试-7">接口测试</a></li>
+      </ol>
+    </li>
+    <li><a href="#师资管理">师资管理</a>
+      <ol>
+        <li><a href="#需求分析-8">需求分析</a>
+          <ol>
+            <li><a href="#业务流程-8">业务流程</a></li>
+            <li><a href="#数据模型-8">数据模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口定义-7">接口定义</a></li>
+        <li><a href="#接口开发-6">接口开发</a>
+          <ol>
+            <li><a href="#mapper层开发-2">Mapper层开发</a></li>
+            <li><a href="#service层开发-2">Service层开发</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口测试-8">接口测试</a></li>
+      </ol>
+    </li>
+    <li><a href="#删除课程">删除课程</a>
+      <ol>
+        <li><a href="#需求分析-9">需求分析</a>
+          <ol>
+            <li><a href="#业务流程-9">业务流程</a></li>
+            <li><a href="#数据模型-9">数据模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口定义-8">接口定义</a></li>
+        <li><a href="#接口开发-7">接口开发</a>
+          <ol>
+            <li><a href="#mapper层开发-3">Mapper层开发</a></li>
+            <li><a href="#service层开发-3">Service层开发</a></li>
+          </ol>
+        </li>
+        <li><a href="#接口测试-9">接口测试</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -509,7 +581,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 73 分钟
+                    阅读时长: 84 分钟
                 </time>
             </div>
         
@@ -517,7 +589,7 @@
         <div>
           <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-description"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>
             <time class="article-words">
-              36422 字
+              41651 字
             </time>
          </div>
        
@@ -9186,20 +9258,1383 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><details>  
-<summary>点击展开代码</summary>
-   ```java
-private Integer getTeachplanCount(SaveTeachplanDto saveTeachplanDto) {
-          //查询当前orderBy最大值
-         LambdaQueryWrapper<Teachplan> queryWrapper=new LambdaQueryWrapper<>();
-         queryWrapper.eq(Teachplan::getCourseId,saveTeachplanDto.getCourseId())
-                 .eq(Teachplan::getParentid,saveTeachplanDto.getParentid()).orderByDesc(Teachplan::getOrderby)
-                         .last("limit 1");
-          Teachplan teachplan = teachplanMapper.selectOne(queryWrapper);
-          return teachplan.getOrderby();
-      }
-```
-</details>
+</div><h2 id="删除课程计划">删除课程计划
+</h2><h3 id="需求分析-6">需求分析
+</h3><h4 id="业务流程-6">业务流程
+</h4><ol>
+<li>课程计划添加成功，如果课程还没有提交时可以删除课程计划。</li>
+<li>删除第一级别的章时要求章下边没有小节方可删除。</li>
+<li>删除第二级别的小节的同时需要将与其关联的视频信息也删除。</li>
+<li>删除课程计划需要传输课程计划的id。</li>
+</ol>
+<h4 id="数据模型-6">数据模型
+</h4><ul>
+<li>
+<p>删除课程计划接口需要用到课程计划数据表以及课程计划和课程计划与媒资的关系表</p>
+<ul>
+<li>
+<p>课程计划表</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan%E8%A1%A8%E7%BB%93%E6%9E%84.png"
+	width="1267"
+	height="458"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan%E8%A1%A8%E7%BB%93%E6%9E%84_hu7963239529036874761.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan%E8%A1%A8%E7%BB%93%E6%9E%84_hu3777289881255333544.png 1024w"
+	loading="lazy"
+	
+		alt="teachplan表结构"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="276"
+		data-flex-basis="663px"
+	
+></p>
+</li>
+<li>
+<p>课程计划与媒资关系表</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan-media%E8%A1%A8%E7%BB%93%E6%9E%84.png"
+	width="1267"
+	height="248"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan-media%E8%A1%A8%E7%BB%93%E6%9E%84_hu10026024322341047213.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/teachplan-media%E8%A1%A8%E7%BB%93%E6%9E%84_hu12089668519648689341.png 1024w"
+	loading="lazy"
+	
+		alt="teachplan-media表结构"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="510"
+		data-flex-basis="1226px"
+	
+></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="接口定义-5">接口定义
+</h3><ul>
+<li>
+<p>删除课程计划的接口示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">删除结点
+</span></span><span class="line"><span class="cl">Request URL: /content/teachplan/246
+</span></span><span class="line"><span class="cl">Request Method: DELETE
+</span></span><span class="line"><span class="cl">如果失败：
+</span></span><span class="line"><span class="cl">{&#34;errCode&#34;:&#34;120409&#34;,&#34;errMessage&#34;:&#34;课程计划信息还有子级信息，无法操作&#34;}
+</span></span><span class="line"><span class="cl">如果成功：状态码200，不返回信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>根据上述的接口示例，接口定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 课程计划的删除
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param id 课程计划id
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@DeleteMapping</span><span class="p">(</span><span class="s">&#34;/teachplan/{id}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;删除课程计划&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteTeachplan</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">teachplanService</span><span class="p">.</span><span class="na">deleteTeachplan</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="接口开发-4">接口开发
+</h3><h4 id="mapper层开发">Mapper层开发
+</h4><ul>
+<li>mapper直接用代码生成器生成的即可。</li>
+</ul>
+<h4 id="service层开发">Service层开发
+</h4><ul>
+<li>定义删除课程计划的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 课程计划删除
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param id 课程计划id
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteTeachplan</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现删除课程计划的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteTeachplan</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.根据课程计划id查询课程，判断课程是否存在</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Teachplan</span><span class="w"> </span><span class="n">teachplan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplan</span><span class="p">.</span><span class="na">getCourseId</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseBase</span><span class="w"> </span><span class="n">courseBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">courseBase</span><span class="o">==</span><span class="kc">null</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;课程不存在&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.课程已经发布不能删除课程计划</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">courseBase</span><span class="p">.</span><span class="na">getStatus</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;203002&#34;</span><span class="p">)){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;课程已发布，无法删除&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.删除章节是，要求该章节下没有小节</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">teachplan</span><span class="p">.</span><span class="na">getGrade</span><span class="p">()</span><span class="o">==</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//查询是父节点为该课章节的个数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">Teachplan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">Teachplan</span><span class="p">::</span><span class="n">getParentid</span><span class="p">,</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">selectCount</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">count</span><span class="o">&gt;</span><span class="n">0</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;课程计划信息还有子级信息，无法操作&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//4.删除小节时，要求删除与其关联的视频信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//4.1删除小节</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">deleteTeachPlan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deleteTeachPlan</span><span class="o">&lt;</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;删除课程小节失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//4.2删除与其关联的媒资信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">teachplan</span><span class="p">.</span><span class="na">getMediaType</span><span class="p">()</span><span class="o">==</span><span class="kc">null</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//无媒资信息，直接返回即可</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">TeachplanMedia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">TeachplanMedia</span><span class="p">::</span><span class="n">getTeachplanId</span><span class="p">,</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMediaMapper</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">delete</span><span class="o">&lt;</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;删除小节的媒资信息失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口测试-6">接口测试
+</h3><ul>
+<li>使用HttpClient测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">### 删除课程计划
+</span></span><span class="line"><span class="cl">DELETE {{content_host}}/content/teachplan/128
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>分以下几种情况测试：</p>
+<ol>
+<li>删除有子课程计划的计划</li>
+<li>删除没有子课程计划的计划</li>
+</ol>
+</li>
+<li>
+<p>前后端联调</p>
+<ol>
+<li>
+<p>删除有子课程计划的计划</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E6%9C%89%E5%AD%90%E7%BA%A7%E5%B0%8F%E8%8A%82%E7%9A%84%E4%B8%8D%E8%83%BD%E5%88%A0%E9%99%A4.png"
+	width="629"
+	height="116"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E6%9C%89%E5%AD%90%E7%BA%A7%E5%B0%8F%E8%8A%82%E7%9A%84%E4%B8%8D%E8%83%BD%E5%88%A0%E9%99%A4_hu6310247471310004817.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E6%9C%89%E5%AD%90%E7%BA%A7%E5%B0%8F%E8%8A%82%E7%9A%84%E4%B8%8D%E8%83%BD%E5%88%A0%E9%99%A4_hu11343649648296811344.png 1024w"
+	loading="lazy"
+	
+		alt="有子级小节的不能删除"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="542"
+		data-flex-basis="1301px"
+	
+></p>
+</li>
+<li>
+<p>删除没有子课程计划的计划</p>
+<ul>
+<li>可直接删除成功</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="课程计划排序">课程计划排序
+</h2><h3 id="需求分析-7">需求分析
+</h3><ul>
+<li>课程计划新增后默认排在同级别最后，课程计划排序功能是可以灵活调整课程计划的显示顺序</li>
+</ul>
+<h4 id="业务流程-7">业务流程
+</h4><ol>
+<li>上移表示将课程计划向上移动。</li>
+<li>下移表示将课程计划向下移动。</li>
+<li>向上移动表示和上边的课程计划交换位置，将两个课程计划的排序字段值交换。</li>
+<li>向下移动表示和下边的课程计划交换位置，将两个课程计划的排序字段值交换。</li>
+</ol>
+<h4 id="数据模型-7">数据模型
+</h4><ul>
+<li>
+<p>课程计划排序用到课程计划表</p>
+<img src="teachplan表结构.png" alt="teachplan表结构" style="zoom:67%;" />
+</li>
+</ul>
+<h3 id="接口定义-6">接口定义
+</h3><ul>
+<li>
+<p>示例接口如下：</p>
+<ul>
+<li>向下移动：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">Request URL: http://localhost:8601/api/content/teachplan/movedown/43
+</span></span><span class="line"><span class="cl">Request Method: POST
+</span></span><span class="line"><span class="cl">43为课程计划id
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>向上移动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">Request URL: http://localhost:8601/api/content/teachplan/moveup/43
+</span></span><span class="line"><span class="cl">Request Method: POST
+</span></span><span class="line"><span class="cl">43为课程计划id
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>每次移动传递两个参数：</p>
+<ul>
+<li>
+<p>移动类型: movedown和moveup</p>
+</li>
+<li>
+<p>课程计划id:4</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>接口定义如下：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 课程计划排序
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param moveType
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param id
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&#34;/teachplan/{moveType}/{id}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;课程计划排序&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">moveTeachplan</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;moveType&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">moveType</span><span class="p">,</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">teachplanService</span><span class="p">.</span><span class="na">moveTeachplan</span><span class="p">(</span><span class="n">moveType</span><span class="p">,</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口开发-5">接口开发
+</h3><h4 id="mapper层开发-1">Mapper层开发
+</h4><ul>
+<li>直接使用代码生成器的</li>
+</ul>
+<h4 id="service层开发-1">Service层开发
+</h4><ul>
+<li>定义课程计划排序的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 课程计划排序
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param moveType
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param id
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">moveTeachplan</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">moveType</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现课程计划排序的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">moveTeachplan</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">moveType</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.根据查询出当前课程计划</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Teachplan</span><span class="w"> </span><span class="n">teachplan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.根据该课程计划的parentId查询所有与其同级的课程计划(根据parentId和courseId)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">Teachplan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">Teachplan</span><span class="p">::</span><span class="n">getParentid</span><span class="p">,</span><span class="n">teachplan</span><span class="p">.</span><span class="na">getParentid</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">Teachplan</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">teachplan</span><span class="p">.</span><span class="na">getCourseId</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">orderByAsc</span><span class="p">(</span><span class="n">Teachplan</span><span class="p">::</span><span class="n">getOrderby</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Teachplan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">teachplans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">selectList</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.判断时上移还是下移</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">moveType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;movedown&#34;</span><span class="p">)){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//下移</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.1.判断是否为最后一级，如果是最后一级，则不允许下移</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">teachplan</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">teachplans</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">teachplans</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="n">1</span><span class="p">))){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;该课程计划为最后一级，不允许下移&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.2.找到当前课程计划的位置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getIndexFromList</span><span class="p">(</span><span class="n">teachplan</span><span class="p">,</span><span class="w"> </span><span class="n">teachplans</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">==-</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">//未知错误</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="n">CommonError</span><span class="p">.</span><span class="na">UNKOWN_ERROR</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.3.找到下一级的课程计划</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Teachplan</span><span class="w"> </span><span class="n">nextTeachplan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplans</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.4.将两者的orderBy交换</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">orderby</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplan</span><span class="p">.</span><span class="na">getOrderby</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">teachplan</span><span class="p">.</span><span class="na">setOrderby</span><span class="p">(</span><span class="n">nextTeachplan</span><span class="p">.</span><span class="na">getOrderby</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">nextTeachplan</span><span class="p">.</span><span class="na">setOrderby</span><span class="p">(</span><span class="n">orderby</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.5.最后将课程计划更新到数据库中</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">updateById</span><span class="p">(</span><span class="n">teachplan</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">updateById</span><span class="p">(</span><span class="n">nextTeachplan</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.6直接返回</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.不是下移，是上移</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.1.判断是否为第一级，如果是第一级，则不允许上移</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">teachplan</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">teachplans</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">0</span><span class="p">))){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;该课程计划为第一级，不允许上移&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.2.找到当前课程计划的位置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getIndexFromList</span><span class="p">(</span><span class="n">teachplan</span><span class="p">,</span><span class="w"> </span><span class="n">teachplans</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">==-</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//未知错误</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="n">CommonError</span><span class="p">.</span><span class="na">UNKOWN_ERROR</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.3.找到上一级的课程计划</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Teachplan</span><span class="w"> </span><span class="n">preTeachplan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplans</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">index</span><span class="o">-</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.4将两者的orderBy交换</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">orderby</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplan</span><span class="p">.</span><span class="na">getOrderby</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">teachplan</span><span class="p">.</span><span class="na">setOrderby</span><span class="p">(</span><span class="n">preTeachplan</span><span class="p">.</span><span class="na">getOrderby</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">preTeachplan</span><span class="p">.</span><span class="na">setOrderby</span><span class="p">(</span><span class="n">orderby</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.5.最后将课程计划更新到数据库中</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">updateById</span><span class="p">(</span><span class="n">teachplan</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">updateById</span><span class="p">(</span><span class="n">preTeachplan</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 获取课程计划在列表中的位置
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param teachplan
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param teachplans
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getIndexFromList</span><span class="p">(</span><span class="n">Teachplan</span><span class="w"> </span><span class="n">teachplan</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Teachplan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">teachplans</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">teachplans</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">teachplan</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">teachplans</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">))){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口测试-7">接口测试
+</h3><ul>
+<li>
+<p>直接前后端联调</p>
+<ol>
+<li>
+<p>向上移动测试</p>
+<ul>
+<li>
+<p>先找一个上边有课程计划的进行测试，向上移动后两个交换顺序。</p>
+</li>
+<li>
+<p>再找最上边的课程计划向上移动，应该没有反映才对，因为已经在最上边了。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8A%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF.png"
+	width="624"
+	height="125"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8A%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF_hu4630512769876553357.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8A%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF_hu12523750100478995934.png 1024w"
+	loading="lazy"
+	
+		alt="课程计划上移失败信息"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="499"
+		data-flex-basis="1198px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p>向下移动测试</p>
+<ul>
+<li>
+<p>先找一个下边有课程计划的进行测试，向下移动后两个交换顺序。</p>
+</li>
+<li>
+<p>再找最下边的课程计划向下移动，应该没有反映才对，因为已经在最下边了。</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8B%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF.png"
+	width="523"
+	height="63"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8B%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF_hu3240405910269939713.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B8%8B%E7%A7%BB%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF_hu8211843837188508485.png 1024w"
+	loading="lazy"
+	
+		alt="课程计划下移失败信息"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="830"
+		data-flex-basis="1992px"
+	
+></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="师资管理">师资管理
+</h2><h3 id="需求分析-8">需求分析
+</h3><h4 id="业务流程-8">业务流程
+</h4><ol>
+<li>课程计划界面点击下一步进入教师管理界面</li>
+<li>点击添加教师打开添加界面，不用实现上传照片</li>
+<li>添加成功查询教师信息</li>
+<li>点击编辑，修改教师信息</li>
+<li>点击删除，删除指定的教师信息。</li>
+</ol>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>注意：</p>
+<ul>
+<li>
+<p>只允许向机构自己的课程中添加老师、删除老师。</p>
+</li>
+<li>
+<p>机构id统一使用：1232141425L</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="数据模型-8">数据模型
+</h4><ul>
+<li>
+<p>师资管理接口需要使用的数据表为课程-教师计划表</p>
+<p><img src="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B-%E6%95%99%E5%B8%88%E8%AE%A1%E5%88%92%E8%A1%A8.png"
+	width="1005"
+	height="245"
+	srcset="/p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B-%E6%95%99%E5%B8%88%E8%AE%A1%E5%88%92%E8%A1%A8_hu15771513961274906200.png 480w, /p/%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/%E8%AF%BE%E7%A8%8B-%E6%95%99%E5%B8%88%E8%AE%A1%E5%88%92%E8%A1%A8_hu18158663507725181500.png 1024w"
+	loading="lazy"
+	
+		alt="课程-教师计划表"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="410"
+		data-flex-basis="984px"
+	
+></p>
+</li>
+</ul>
+<h3 id="接口定义-7">接口定义
+</h3><ul>
+<li>
+<p>示例接口如下</p>
+<ul>
+<li>查询教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">get</span><span class="w"> </span><span class="o">/</span><span class="n">courseTeacher</span><span class="o">/</span><span class="n">list</span><span class="o">/</span><span class="n">75</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">75为课程id</span><span class="err">，</span><span class="n">请求参数为课程id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">响应结果</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;id&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">23</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;courseId&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">75</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;teacherName&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;张老师&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;position&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;讲师&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;introduction&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;张老师教师简介张老师教师简介张老师教师简介张老师教师简介&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;photograph&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;createDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>添加教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">post</span><span class="w"> </span><span class="o">/</span><span class="n">courseTeacher</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">请求参数</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;courseId&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">75</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;teacherName&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;王老师&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;position&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师职位&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;introduction&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师简介&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">响应结果</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;id&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">24</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;courseId&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">75</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;teacherName&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;王老师&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;position&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师职位&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;introduction&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师简介&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;photograph&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;createDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">post</span><span class="w"> </span><span class="o">/</span><span class="n">courseTeacher</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">请求参数</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;id&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">24</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;courseId&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">75</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;teacherName&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;王老师&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;position&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师职位&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;introduction&#34;</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;教师简介&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;photograph&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s">&#34;createDate&#34;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">响应</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="s">&#34;id&#34;</span><span class="p">:</span><span class="n">24</span><span class="p">,</span><span class="s">&#34;courseId&#34;</span><span class="p">:</span><span class="n">75</span><span class="p">,</span><span class="s">&#34;teacherName&#34;</span><span class="p">:</span><span class="s">&#34;王老师&#34;</span><span class="p">,</span><span class="s">&#34;position&#34;</span><span class="p">:</span><span class="s">&#34;教师职
+</span></span></span><span class="line"><span class="cl"><span class="s">位&#34;</span><span class="p">,</span><span class="s">&#34;introduction&#34;</span><span class="p">:</span><span class="s">&#34;教师简介&#34;</span><span class="p">,</span><span class="s">&#34;photograph&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s">&#34;createDate&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">delete</span><span class="w"> </span><span class="o">/</span><span class="n">ourseTeacher</span><span class="o">/</span><span class="n">course</span><span class="o">/</span><span class="n">75</span><span class="o">/</span><span class="n">26</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nl">75</span><span class="p">:</span><span class="n">课程id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nl">26</span><span class="p">:</span><span class="n">教师id</span><span class="err">，</span><span class="n">即course_teacher表的主键</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">请求参数</span><span class="err">：</span><span class="n">课程id</span><span class="err">、</span><span class="n">教师id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">响应</span><span class="err">：</span><span class="n">状态码200</span><span class="err">，</span><span class="n">不返回信息</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>接口定义如下</p>
+<ul>
+<li>查询教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 根据课程id查询教师列表
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&#34;/list/{courseId}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;查询教师接口&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCourseTeacherList</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;courseId&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacherService</span><span class="p">.</span><span class="na">getCourseTeacherList</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>添加教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 添加或修改教师
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseTeacher
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@PostMapping</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;添加或修改教师接口&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="nf">addCourseTeacher</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="nd">@Validated</span><span class="p">(</span><span class="n">ValidationGroups</span><span class="p">.</span><span class="na">Insert</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//TODO 获取机构id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1232141425L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacherService</span><span class="p">.</span><span class="na">saveCourseTeacher</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="n">courseTeacher</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 添加或修改教师
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseTeacher
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@PostMapping</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;添加或修改教师接口&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="nf">addCourseTeacher</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="nd">@Validated</span><span class="p">(</span><span class="n">ValidationGroups</span><span class="p">.</span><span class="na">Insert</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//TODO 获取机构id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1232141425L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacherService</span><span class="p">.</span><span class="na">saveCourseTeacher</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="n">courseTeacher</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除教师</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 删除教师接口
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param teacherId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@DeleteMapping</span><span class="p">(</span><span class="s">&#34;course/{courseId}/{courseTeacherId}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;删除教师接口&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseTeacher</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;courseId&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                    </span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;courseTeacherId&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">teacherId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//TODO 获取机构id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1232141425L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">courseTeacherService</span><span class="p">.</span><span class="na">deleteCourseTeacher</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="n">courseId</span><span class="p">,</span><span class="w"> </span><span class="n">teacherId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="接口开发-6">接口开发
+</h3><h4 id="mapper层开发-2">Mapper层开发
+</h4><ul>
+<li>直接使用代码生成器的</li>
+</ul>
+<h4 id="service层开发-2">Service层开发
+</h4><h5 id="service接口定义">Service接口定义
+</h5><ul>
+<li>定义查询教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 根据课程id查询教师列表
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCourseTeacherList</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义增加或修改教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 添加或修改教师
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param companyId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseTeacher
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="nf">saveCourseTeacher</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义删除教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 删除教师
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param teacherId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseTeacher</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">teacherId</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="service接口实现">Service接口实现
+</h5><ul>
+<li>实现查询教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCourseTeacherList</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.根据课程id查询老师列表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">selectList</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现增加或修改教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="nf">saveCourseTeacher</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.业务逻辑校验，只允许向机构自己的课程中添加或修改老师</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">checkCompanyId</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">.</span><span class="na">getCourseId</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.判断是否已经存在</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getId</span><span class="p">,</span><span class="n">courseTeacher</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">courseTeacherOld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">selectOne</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">courseTeacherOld</span><span class="o">!=</span><span class="kc">null</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.1已经存在，修改师资信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">updateById</span><span class="p">(</span><span class="n">courseTeacher</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//2.2.判断是否修改成功</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">update</span><span class="o">&lt;</span><span class="w"> </span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;修改教师信息失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3不存在，添加师资信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.1course_id和teacher_name不能同时相等</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//即一个老师不能重复的与一个课程对应</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">courseTeacher</span><span class="p">.</span><span class="na">getCourseId</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getTeacherName</span><span class="p">,</span><span class="n">courseTeacher</span><span class="p">.</span><span class="na">getTeacherName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseTeacher</span><span class="w"> </span><span class="n">teacher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">selectOne</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">teacher</span><span class="o">!=</span><span class="kc">null</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;该老师已添加&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.2设置创建时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">courseTeacher</span><span class="p">.</span><span class="na">setCreateDate</span><span class="p">(</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.3添加师资信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">insert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">courseTeacher</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//3.4.判断是否插入成功</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">insert</span><span class="o">&lt;</span><span class="w"> </span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;添加教师信息失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//4.返回添加的课程老师对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">courseTeacher</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkCompanyId</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.2根据课程id查询课程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseBase</span><span class="w"> </span><span class="n">courseBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.3判断课程是否属于本机构</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">companyId</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">courseBase</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">())){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;本机构只能变更本机构的课程&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现删除教资的service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkCompanyId</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.2根据课程id查询课程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseBase</span><span class="w"> </span><span class="n">courseBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.3判断课程是否属于本机构</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">companyId</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">courseBase</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">())){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;本机构只能变更本机构的课程&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseTeacher</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">teacherId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.业务逻辑校验，只允许向机构自己的课程中删除老师</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">checkCompanyId</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.删除</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getId</span><span class="p">,</span><span class="n">teacherId</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">queryWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.1判断是否删除成功</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">delete</span><span class="o">&lt;</span><span class="w"> </span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;删除教师信息失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口测试-8">接口测试
+</h3><ul>
+<li>直接前后端联调即可</li>
+</ul>
+<h2 id="删除课程">删除课程
+</h2><h3 id="需求分析-9">需求分析
+</h3><h4 id="业务流程-9">业务流程
+</h4><ol>
+<li>课程的审核状态为未提交时方可删除。</li>
+<li>删除课程需要删除课程相关的基本信息、营销信息、课程计划、课程教师信息。</li>
+</ol>
+<h4 id="数据模型-9">数据模型
+</h4><ul>
+<li>删除课程需要使用的表有：课程基本信息表，课程营销表，课程计划表，课程计划与媒资的关系表，课程教师信息表</li>
+</ul>
+<h3 id="接口定义-8">接口定义
+</h3><ul>
+<li>删除课程接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">delete</span><span class="w">  </span><span class="o">/</span><span class="n">course</span><span class="o">/</span><span class="n">87</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">87为课程id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">请求参数</span><span class="err">：</span><span class="n">课程id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">响应</span><span class="err">：</span><span class="n">状态码200</span><span class="err">，</span><span class="n">不返回信息</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除课程接口定义</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 删除课程
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId 要删除的课程id
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="s">&#34;删除课程&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@DeleteMapping</span><span class="p">(</span><span class="s">&#34;/course/{courseId}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseBase</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&#34;courseId&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//TODO 获取机构id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="o">=</span><span class="n">1232141425L</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">courseBaseService</span><span class="p">.</span><span class="na">deleteCourseBase</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口开发-7">接口开发
+</h3><h4 id="mapper层开发-3">Mapper层开发
+</h4><ul>
+<li>使用代码生成器的即可</li>
+</ul>
+<h4 id="service层开发-3">Service层开发
+</h4><ul>
+<li>定义删除课程service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 删除课程
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseBase</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现删除课程service接口</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 校验本机构只能变更本机构的课程
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param companyId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param courseId
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkCompanyId</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseBase</span><span class="w"> </span><span class="n">courseBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">companyId</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">courseBase</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">())){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;本机构只能变更本机构的课程&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteCourseBase</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="n">Long</span><span class="w"> </span><span class="n">courseId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//本机构只能删除本机构的课程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">checkCompanyId</span><span class="p">(</span><span class="n">companyId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.课程的审核状态为未提交时方可删除。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//1.1根据课程id查询课程基本信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CourseBase</span><span class="w"> </span><span class="n">courseBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">selectById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">courseBase</span><span class="o">==</span><span class="kc">null</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;课程不存在&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="s">&#34;202002&#34;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">courseBase</span><span class="p">.</span><span class="na">getAuditStatus</span><span class="p">())){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;课程的审核状态为未提交时方可删除。&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2 删除课程信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.1删除课程基本信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseBaseMapper</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">delete1</span><span class="o">&lt;</span><span class="n">1</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">XueChengPlusException</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="s">&#34;删除课程基本信息失败&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.2删除课程营销信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       	</span><span class="kt">int</span><span class="w"> </span><span class="n">delete2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseMarketMapper</span><span class="p">.</span><span class="na">deleteById</span><span class="p">(</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.3删除课程计划信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">Teachplan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper1</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper1</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">Teachplan</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMapper</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">queryWrapper1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.4删除课程媒资信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">TeachplanMedia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper2</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper2</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">TeachplanMedia</span><span class="p">::</span><span class="n">getTeachplanId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teachplanMediaMapper</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">queryWrapper2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//2.5 删除课程教师信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">CourseTeacher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryWrapper3</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">LambdaQueryWrapper</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queryWrapper3</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">CourseTeacher</span><span class="p">::</span><span class="n">getCourseId</span><span class="p">,</span><span class="n">courseId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">delete5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">courseTeacherMapper</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">queryWrapper3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="接口测试-9">接口测试
+</h3><ul>
+<li>直接前后端联调即可</li>
+</ul>
 </section>
 
 
@@ -9363,7 +10798,7 @@ private Integer getTeachplanCount(SaveTeachplanDto saveTeachplanDto) {
         
     
     发表了3篇文章 · 
-    总计41.70k字
+    总计46.93k字
     </section>
 
     
